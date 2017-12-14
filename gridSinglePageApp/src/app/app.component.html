@@ -1,0 +1,105 @@
+<div *ngIf="!data">Loading...</div>
+
+<div *ngIf="data">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h3>Employee Information</h3>
+
+    </div>
+    <div class="order">
+
+        Order By :
+        <select [(ngModel)]="orderByVal">
+          <option  [ngValue]="'name'">Name</option>
+          <option  [ngValue]="'email'">Email</option>
+          <option  [ngValue]="'id'">ID</option>
+          <option  [ngValue]="'gender'">Gender</option>
+        </select>
+  <div class="forMob">
+    <input class="box" type="text" name="id" [(ngModel)]="filter.id" placeholder="Search By Id" >
+    <input class="box" type="text" name="name" [(ngModel)]="filter.name" placeholder="Search By Name" >
+    <input class="box" type="text" name="email" [(ngModel)]="filter.email" placeholder="Search By Email" >
+    <input class="box" type="text" name="gender" [(ngModel)]="filter.gender" placeholder="Search By Gender" >
+    <br>
+    <input class="box" type="checkbox" [(ngModel)]="selectAll" (click)="checkAll()"> Select All
+    <br>
+    <div class="delete" (click)="toggleSelection($event,result);delete()">Delete Selected</div>
+  </div>
+
+    </div>
+    <div class="row static forDesktop">
+      <div class="col-md-7 col-xs-7">
+        <input type="checkbox" [(ngModel)]="selectAll" (click)="checkAll()"> <br>Select All
+      </div>
+      <div class="col-md-7 col-xs-7">
+        ID
+        <br>
+         <input class="box" type="text" name="id" [(ngModel)]="filter.id" placeholder="Search By Id" >
+      </div>
+      <div class="col-md-7 col-xs-7">
+        Name
+        <br>
+        <input class="box" type="text" name="name" [(ngModel)]="filter.name" placeholder="Search By Name" >
+      </div>
+      <div class="col-md-7 col-xs-7">
+        Email
+        <br>
+        <input class="box" type="text" name="email" [(ngModel)]="filter.email" placeholder="Search By Email" >
+      </div>
+      <div class="col-md-7 col-xs-7">
+        Gender
+        <br>
+        <input class="box" type="text" name="gender" [(ngModel)]="filter.gender" placeholder="Search By Gender" >
+      </div>
+      <div class="col-md-7 col-xs-7">
+        Salary
+      </div>
+      <div class="col-md-7 col-xs-7">
+        <div class="delete" (click)="delete()">Delete Selected</div>
+      </div>
+    </div>
+    <accordion>
+      <div class="row" *ngFor="let result of data | searchBy : filter | orderBy : [orderByVal] | paginate: { itemsPerPage: 25, currentPage: p }  ">
+        <accordion-group>
+          <div accordion-heading class="clearfix">
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob">Select</div>
+              <input type="checkbox" [checked]="exist(result)" (click)="toggleSelection($event,result)">
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob bold">ID:</div>  {{result.id}}
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob bold">Name:</div>  {{result.name}}
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob bold">Email:</div>  <div>{{result.email}}</div>
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob bold">Gender:</div>  {{result.gender}}
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="forMob bold">Salary:</div>  {{calSalary(result.salary[0])}}
+            </div>
+            <div class="col-md-7 col-xs-12">
+              <div class="delete" (click)="toggleSelection($event,result);delete()">Delete</div>
+            </div>
+          </div>
+         <div class="row bold">
+           <div class="col-md-4 col-xs-12">
+             Basic <input type="text"  [(ngModel)]="result.salary[0].basic" >
+           </div>
+           <div class="col-md-4 col-xs-12">
+             Allowance <input type="text"  [(ngModel)]="result.salary[0].allowance" >
+           </div>
+           <div class="col-md-4 col-xs-12">
+             Deduction <input type="text"  [(ngModel)]="result.salary[0].deduction" >
+           </div>
+         </div>
+        </accordion-group>
+      </div>
+    </accordion>
+    <br>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

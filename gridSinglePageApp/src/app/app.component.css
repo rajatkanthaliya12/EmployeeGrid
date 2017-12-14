@@ -1,0 +1,69 @@
+.jumbotron h3{
+  text-align: center;
+}
+.col-md-7,.col-xs-7 {
+  word-wrap: break-word;
+  width: 14.28%;
+  text-align: center;
+}
+.forMob {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .col-xs-12 {
+    width: 100%;
+    padding: 10px;
+  }
+  .forMob {
+    display: block;
+  }
+  .box {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 10px;
+  }
+  .forDesktop {
+    display: none;
+  }
+  .order {
+    box-shadow: -1px 5px 10px 0px #888888;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}
+
+.row{
+  margin: 0;
+}
+.delete{
+  margin:5px 0;
+  padding: 7px;
+  background: #333;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.static {
+  padding: 10px;
+  background: orange;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.static .box {
+  font-size: 12px;
+  width: 70%;
+}
+
+.order {
+  text-align: center;
+  padding-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
